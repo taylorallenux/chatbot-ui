@@ -86,8 +86,8 @@ export const MessageCodeBlock: FC<MessageCodeBlockProps> = memo(
     }
 
     return (
-      <div className="codeblock relative w-full bg-zinc-950 font-sans">
-        <div className="flex w-full items-center justify-between bg-zinc-700 px-4 text-white">
+      <div className="codeblock relative w-full rounded-md bg-zinc-950 font-sans">
+        <div className="flex w-full items-center justify-between rounded-t-md bg-zinc-700 px-3 py-1.5 text-white">
           <span className="text-xs lowercase">{language}</span>
           <div className="flex items-center space-x-1">
             <Button
@@ -116,7 +116,10 @@ export const MessageCodeBlock: FC<MessageCodeBlockProps> = memo(
           customStyle={{
             margin: 0,
             width: "100%",
-            background: "transparent"
+            background: "transparent",
+            padding: "12px 14px",
+            borderBottomLeftRadius: 6,
+            borderBottomRightRadius: 6
           }}
           codeTagProps={{
             style: {

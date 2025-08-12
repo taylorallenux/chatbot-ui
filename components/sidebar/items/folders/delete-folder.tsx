@@ -105,7 +105,7 @@ export const DeleteFolder: FC<DeleteFolderProps> = ({
         <IconTrash className="hover:opacity-50" size={18} />
       </DialogTrigger>
 
-      <DialogContent className="min-w-[550px]">
+      <DialogContent className="w-full max-w-[95vw] sm:min-w-[550px]">
         <DialogHeader>
           <DialogTitle>Delete {folder.name}</DialogTitle>
 

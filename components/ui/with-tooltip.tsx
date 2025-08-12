@@ -1,4 +1,4 @@
-import { FC } from "react"
+import React, { FC } from "react"
 import {
   Tooltip,
   TooltipContent,
@@ -6,7 +6,7 @@ import {
   TooltipTrigger
 } from "./tooltip"
 
-interface WithTooltipProps {
+interface WithTooltipProps extends React.ComponentPropsWithoutRef<"span"> {
   display: React.ReactNode
   trigger: React.ReactNode
 
@@ -14,20 +14,37 @@ interface WithTooltipProps {
   side?: "left" | "right" | "top" | "bottom"
 }
 
-export const WithTooltip: FC<WithTooltipProps> = ({
-  display,
-  trigger,
+export const WithTooltip = React.forwardRef<HTMLSpanElement, WithTooltipProps>(
+  (
+    {
+      display,
+      trigger,
+      delayDuration = 500,
+      side = "right",
+      className,
+      ...rest
+    },
+    ref
+  ) => {
+    return (
+      <TooltipProvider delayDuration={delayDuration}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              ref={ref}
+              className={`inline-flex items-center ${className ?? ""}`}
+              tabIndex={0}
+              {...rest}
+            >
+              {trigger}
+            </span>
+          </TooltipTrigger>
 
-  delayDuration = 500,
-  side = "right"
-}) => {
-  return (
-    <TooltipProvider delayDuration={delayDuration}>
-      <Tooltip>
-        <TooltipTrigger>{trigger}</TooltipTrigger>
+          <TooltipContent side={side}>{display}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    )
+  }
+)
 
-        <TooltipContent side={side}>{display}</TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  )
-}
+WithTooltip.displayName = "WithTooltip"

@@ -44,3 +44,10 @@ sw.js
 sw.js.map
 workbox-*.js
 workbox-*.js.map
+
+# local supabase CLI binaries and archives (do not commit large binaries)
+bin/supabase
+bin/supabase_*.tar.gz
+
+# generated PWA workers
+public/worker-*.js

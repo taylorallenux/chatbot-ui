@@ -7,7 +7,7 @@ import { Tabs } from "@/components/ui/tabs"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { cn } from "@/lib/utils"
 import { ContentType } from "@/types"
-import { IconChevronCompactRight } from "@tabler/icons-react"
+import { IconChevronCompactRight, IconMenu2 } from "@tabler/icons-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { FC, useState } from "react"
 import { useSelectFileHandler } from "../chat/chat-hooks/use-select-file-handler"
@@ -71,12 +71,23 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
     <div className="flex size-full">
       <CommandK />
 
+      {/* Mobile hamburger toggle */}
+      <Button
+        className={cn("absolute left-2 top-2 z-20 size-[32px] sm:hidden")}
+        variant="ghost"
+        size="icon"
+        aria-label="Toggle sidebar"
+        onClick={handleToggleSidebar}
+      >
+        <IconMenu2 size={22} />
+      </Button>
+
       <div
         className={cn(
-          "duration-200 dark:border-none " + (showSidebar ? "border-r-2" : "")
+          "duration-200 dark:border-none shrink-0 " +
+            (showSidebar ? "border-r-2" : "")
         )}
         style={{
-          // Sidebar
           minWidth: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
           maxWidth: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
           width: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px"
@@ -99,7 +110,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
       </div>
 
       <div
-        className="bg-muted/50 relative flex w-screen min-w-[90%] grow flex-col sm:min-w-fit"
+        className="bg-muted/50 relative flex min-w-0 grow flex-col"
         onDrop={onFileDrop}
         onDragOver={onDragOver}
         onDragEnter={handleDragEnter}
@@ -115,7 +126,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
 
         <Button
           className={cn(
-            "absolute left-[4px] top-[50%] z-10 size-[32px] cursor-pointer"
+            "absolute left-[4px] top-[50%] z-10 hidden size-[32px] cursor-pointer sm:inline-flex"
           )}
           style={{
             // marginLeft: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",

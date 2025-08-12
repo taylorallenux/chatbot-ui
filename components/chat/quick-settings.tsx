@@ -237,7 +237,7 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="min-w-[300px] max-w-[500px] space-y-4"
+        className="min-w-[240px] max-w-[95vw] space-y-4 sm:min-w-[300px] sm:max-w-[500px]"
         align="start"
       >
         {presets.length === 0 && assistants.length === 0 ? (

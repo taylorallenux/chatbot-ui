@@ -181,16 +181,20 @@ export const Message: FC<MessageProps> = ({
 
   return (
     <div
-      className={cn(
-        "flex w-full justify-center",
-        message.role === "user" ? "" : "bg-secondary"
-      )}
+      className={cn("my-2 flex w-full justify-center px-2 sm:my-3 sm:px-4")}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onKeyDown={handleKeyDown}
     >
-      <div className="relative flex w-full flex-col p-6 sm:w-[550px] sm:px-0 md:w-[650px] lg:w-[650px] xl:w-[700px]">
-        <div className="absolute right-5 top-7 sm:right-0">
+      <div
+        className={cn(
+          "relative flex w-full flex-col rounded-xl border p-4 shadow-lg sm:w-[550px] sm:p-6 md:w-[650px] lg:w-[650px] xl:w-[700px]",
+          message.role === "assistant"
+            ? "bg-secondary/90 border-border/80 shadow-black/40 dark:bg-black/55"
+            : "bg-muted/90 border-border/80 shadow-black/40 dark:bg-black/65"
+        )}
+      >
+        <div className="absolute right-4 top-4 sm:right-6 sm:top-6">
           <MessageActions
             onCopy={handleCopy}
             onEdit={handleStartEdit}
@@ -212,7 +216,7 @@ export const Message: FC<MessageProps> = ({
               <div className="text-lg font-semibold">Prompt</div>
             </div>
           ) : (
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 pr-10 sm:pr-12">
               {message.role === "assistant" ? (
                 messageAssistantImage ? (
                   <Image
@@ -253,7 +257,7 @@ export const Message: FC<MessageProps> = ({
                 />
               )}
 
-              <div className="font-semibold">
+              <div className="font-semibold leading-none">
                 {message.role === "assistant"
                   ? message.assistant_id
                     ? assistants.find(
